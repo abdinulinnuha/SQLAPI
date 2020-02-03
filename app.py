@@ -7,19 +7,19 @@ import gunicorn
 
 app = Flask(__name__)
 
-##GET_ALL_TABLE_NAME
-##Funsi API dimulai dari @app.route
-#@app.route('/data/get/<database_name>',methods=['GET'])
-##Fungsi untuk mendapatkan semua nama table pada database
-#def GET_ALL_TABLE_NAME(database_name):
-#    #definisikan object connection /data/databasename
-#    conn = sqlite3.connect('data/' + str(database_name))
-#    #perintah SQL yang digunakan SELECT semua nama pada sqlite_master ambil semua nama table yang tidak ada string sqlite%
-#    sql_command = "SELECT name FROM sqlite_master WHERE type = 'table' AND name NOT LIKE 'sqlite_%'"
-#    #simpan pada dataframe data1 hasil SQL Query tersebut
-#    data1 = pd.read_sql_query(str(sql_command),conn)
-#    #kembalikan dataframe
-#    return (data1.to_json())
+#GET_ALL_TABLE_NAME
+#Funsi API dimulai dari @app.route
+@app.route('/data/get/<database_name>',methods=['GET'])
+#Fungsi untuk mendapatkan semua nama table pada database
+def GET_ALL_TABLE_NAME(database_name):
+    #definisikan object connection /data/databasename
+    conn = sqlite3.connect('data/' + str(database_name))
+    #perintah SQL yang digunakan SELECT semua nama pada sqlite_master ambil semua nama table yang tidak ada string sqlite%
+    sql_command = "SELECT name FROM sqlite_master WHERE type = 'table' AND name NOT LIKE 'sqlite_%'"
+    #simpan pada dataframe data1 hasil SQL Query tersebut
+    data1 = pd.read_sql_query(str(sql_command),conn)
+    #kembalikan dataframe
+    return (data1.to_json())
 
 ##GET_ALL_COlUMN_AT_TABLE
 ## API ditambahkan adalah <table> dimana object <table> akan diparsing ke dalam SQL Query
